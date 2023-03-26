@@ -1,0 +1,135 @@
+
+
+body, html{
+    min-height: 100vh;
+}
+
+.shadowed{
+    box-shadow: 5px 5px 5px 2px rgba(91, 151, 195, 0.5);
+}
+
+
+/* Navbar */
+
+.navbar{
+    background-color: #b51d1d;
+    transition: background-color 5s ease !important;
+}
+
+.navbar-brand{
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-item{
+    background-color: #b51d1d;
+    transition: background-color .5s ease-in;
+}
+
+
+.nav-item-white a{
+    color: white !important;
+}
+
+.nav-item:hover{
+    background-color: rgb(219, 79, 47);
+    height: 100%;
+}
+
+.dropdown-menu{
+    background-color: rgb(219, 79, 47);
+    color: black !important;
+}
+  
+.dropdown-item:hover{
+    background-color: rgb(219, 79, 47) !important;
+    color: white !important;
+}
+
+
+/* MAZNUTO SA https://www.geeksforgeeks.org/how-to-change-hamburger-toggler-color-in-bootstrap/, MENJA boju toggler ikonice */
+/* Set the border color */
+
+.custom-toggler.navbar-toggler {
+    border-color: white !important;
+}
+
+.custom-toggler.navbar-toggler:focus {
+    box-shadow: 2px 2px 2px rgba(91, 151, 195, 0.5);
+}
+
+/* Setting the stroke to green using rgb values (0, 128, 0) */
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+/* Home page */
+
+.category{
+    border: solid;
+    border-width: .3rem;
+    border-color: #b51d1d;
+}
+
+.nav-category{
+    position: relative;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-category::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-category:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Modals */
+.modal-style{
+    border: solid !important;
+    border-radius: 0px !important;
+    border-color:#b51d1d !important;
+    border-width: .5rem !important;
+}
+
+.modal-backdrop
+{
+    opacity: .75 !important;
+}
+
+/* Category topics */
+
+.new-topic-btn{
+    background-color: #b51d1d !important;
+}
+
+.new-topic-btn:active{
+    box-shadow: none;
+}
+
+.page-link{
+    color:#b51d1d !important;
+}
+
+.page-link.active{
+    background-color: #b51d1d !important;
+    color: white !important;
+}
+
+/* Footer */
+.footer{
+    padding:10px;   
+}

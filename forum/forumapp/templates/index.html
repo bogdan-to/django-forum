@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Forum{% endblock title %}
+
+{% block content %}
+
+<br><br>
+
+
+
+<div class="title text-center">
+    <h3> Kategorije</h3>
+</div>
+<div class="categories d-flex flex-column justify-content-center align-items-center">
+    {% for category in categories %}
+
+    <div class="category row border border-danger border-5 col-md-9 shadowed m-1">
+            
+        <div class="category-header p-2 fw-bold fs-5 row align-items-center">
+            <div class="category-logo col-2 col-md-1">
+                <!-- <img class="logo-img rounded-circle" src="https://www.w3.org/html/logo/downloads/HTML5_Logo_64.png" alt="">-->
+            </div>
+            <div class="category-title col-10 col-md-10">
+                <a class="nav-category" href="{% url 'category' category.category_slug  %}">{{ category.category_name }}</a> 
+            </div>
+        </div>
+        <hr class="m-0 border border-secondary border-2 opacity-25 mx-auto" style="width:97%">
+        <div class="category-body row p-3 px-5">
+            {{ category.category_description }}
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

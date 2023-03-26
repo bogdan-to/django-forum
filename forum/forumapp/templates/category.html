@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.category_name}}{% endblock title %}
+
+{% block content %}
+  <br><br>
+  
+  <div class="mx-5">
+
+    <h5>Teme u kategoriji: {{ category.category_name }} </h5>
+    
+    
+    {% if user.is_authenticated %}
+    <div class="new-topic my-3">
+        <button type="button" class="btn btn-dark new-topic-btn shadowed rounded-0" data-bs-toggle="collapse" data-bs-target="#newTopicForm" aria-expanded="false" aria-controls="collapsenewTopicForm">+ Nova tema</button>
+    </div>
+
+    <div class="collapse" id="newTopicForm">
+        <div class="card card-body border border-dark rounded-0">
+          <form method="POST" action="{% url 'new_topic' category.id %}">
+            {% csrf_token %}
+            <div class="d-flex">
+              <label class="p-2" for="new_topic">Tema: </label>
+              <input type="text" name="new_topic_title" id="new_topic" class="form-control">
+              <button type="submit" class="btn btn-dark new-topic-btn rounded-0">Pošalji</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    {% endif %}
+
+    
+      <table class="table table-striped border">
+
+        {% for topic in topics_on_page %}
+        <tr>
+          <td>
+            {{ topic.topic_title }}
+          </td>
+          <td>
+            {{ topic.topic_posts_count }}
+          </td>
+          <td>
+            {{ topic.topic_opened_by }}
+          </td>
+          <td>
+            {{ topic.topic_date }}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <!-- paginator -->
+    {% if topics_on_page.has_other_pages %}
+    <nav aria-label="Page navigation">
+      <ul class="pagination d-flex justify-content-center">
+
+        {% if topics_on_page.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ topics_on_page.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link disabled" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for page_number in page_range|default_if_none:topics_on_page.paginator.get_elided_page_range %}
+          {% if page_number == topics_on_page.number %}
+            <li class="page-item"><a class="page-link active" href="?page={{ page_number }}">{{ page_number }}</a></li>
+          {% else %}
+            {% if page_number == topics_on_page.paginator.ELLIPSIS %}
+              <li class="page-item"><span class="page-link">{{ page_number }}</span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {% if topics_on_page.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ topics_on_page.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link disabled" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </nav>
+    {% endif %}
+      
+
+      
+
+    
+
+      
+
+    
+  
+
+{% endblock content %}

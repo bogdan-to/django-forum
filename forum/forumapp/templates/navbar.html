@@ -1,0 +1,61 @@
+
+
+<nav class="navbar navbar-expand-lg p-0 shadowed sticky-top">
+  <div class="container-fluid">
+    <!-- Brand and toggler -->
+    <a class="navbar-brand" href="{% url 'index' %}">FORUM</a>
+    <button class="navbar-toggler custom-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- navbar -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item nav-item-white p-2">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Početna</a>
+        </li>
+        <li class="nav-item dropdown p-2">
+          <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Kategorije</a>
+          <ul class="dropdown-menu">
+            {% for cat in categories %}
+            <li><a class="dropdown-item" href="{% url 'category' cat.category_slug %}">{{ cat.category_name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+
+      
+      <hr class="border border-danger border-2 opacity-50">
+
+      {% if user.is_authenticated %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item nav-item-white p-2">
+            <a class="nav-link" aria-current="page" href="#"><i class="fa fa-user"></i>&nbsp{{ user|capfirst }}</a>
+          </li>
+          <li class="nav-item  nav-item-white p-2">
+            <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa fa-power-off"></i>&nbspOdjava</a>
+          </li>
+        </ul>
+      {% else %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item nav-item-white p-2">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#register" href="#register">Registracija</a>
+          </li>
+          <li class="nav-item  nav-item-white p-2">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#login" href="#login">Prijava</a>
+          </li>
+        </ul>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="register" data-bs-backdrop="static" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+ {% include 'register.html' %}
+</div>
+
+<div class="modal fade" id="login" data-bs-backdrop="static" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  {% include 'login.html' %}
+ </div>
+

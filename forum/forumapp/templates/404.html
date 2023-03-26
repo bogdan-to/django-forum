@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}404{% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="title text-center">
+        <h1>Greska 404</h1>
+        <h3>Stranica ne postoji!</h3>
+        <br><br><br>
+        <div class="bottom-nav m-4">
+            <a href="{{ request.META.HTTP_REFERER }}">
+                <button type="button" class="btn btn-dark">Nazad</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

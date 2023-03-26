@@ -1,0 +1,29 @@
+
+
+
+
+{% block content %}
+
+
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content modal-style">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4 fw-bold" id="registerModalLabel">Registracija</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{% url 'register' %}">
+        <div class="modal-body">
+          <div class="container-fluid">
+              {% csrf_token %}
+              {{ register_form }}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button type="submit" class="btn btn-primary">Registruj se</button>
+        </div>
+      </form>
+    </div>
+  </div>
+ 
+{% endblock content %}
