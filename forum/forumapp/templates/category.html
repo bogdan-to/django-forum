@@ -5,18 +5,17 @@
 {% block content %}
   <br><br>
   
-  <div class="mx-5">
+  <div class="mx-md-5">
 
     <h5>Teme u kategoriji: {{ category.category_name }} </h5>
     
-    
     {% if user.is_authenticated %}
-    <div class="new-topic my-3">
+    <div class="new-topic mb-3">
         <button type="button" class="btn btn-dark new-topic-btn shadowed rounded-0" data-bs-toggle="collapse" data-bs-target="#newTopicForm" aria-expanded="false" aria-controls="collapsenewTopicForm">+ Nova tema</button>
     </div>
 
     <div class="collapse" id="newTopicForm">
-        <div class="card card-body border border-dark rounded-0">
+        <div class="card card-body mx-1 rounded-0 shadowed">
           <form method="POST" action="{% url 'new_topic' category.id %}">
             {% csrf_token %}
             <div class="d-flex">
@@ -30,25 +29,17 @@
     {% endif %}
 
     
-      <table class="table table-striped border">
-
-        {% for topic in topics_on_page %}
-        <tr>
-          <td>
-            {{ topic.topic_title }}
-          </td>
-          <td>
-            {{ topic.topic_posts_count }}
-          </td>
-          <td>
-            {{ topic.topic_opened_by }}
-          </td>
-          <td>
-            {{ topic.topic_date }}
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
+    <div class="topics list-group mb-5">
+      {% for topic in topics_on_page %}
+      <div class="topic list-group-item list-group-item-transparent rounded-0 shadowed m-1">
+        <div class="topic-title">
+          <h5>Tema: <a href="{% url 'topic' category.category_slug topic.topic_slug %}" class="text-red-700">{{ topic.topic_title }}</a></h5>
+        </div>
+        <div class="topic-details">
+          <small>Broj poruka: {{ topic.topic_posts_count }}, postavio/la: {{ topic.topic_opened_by }}, datuma: {{ topic.topic_date|date:"j.n.Y, H:i" }}</small>
+        </div>
+      </div>
+      {% endfor %}
     </div>
 
     <!-- paginator -->
@@ -100,14 +91,5 @@
     </nav>
     {% endif %}
       
-
-      
-
-    
-
-      
-
-    
-  
 
 {% endblock content %}

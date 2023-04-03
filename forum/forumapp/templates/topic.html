@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.category_name}}{% endblock title %}
+
+{% block content %}
+<br><br>
+
+<div class="mx-md-5">
+
+    <h5>Tema: {{ topic.topic_title }} </h5>
+
+    <div class="posts list-group mb-5">
+        {% for post in posts %}
+        <div class="post d-flex list-group-item list-group-item-transparent rounded-0 shadowed m-1">
+            <div class="post-details col-1">
+                <div class="post-user text-center">
+                    <strong> {{ post.post_user }} </strong>   
+                </div>
+                <div class="user-avatar">
+                </div>
+                <br>
+                <div class="date text-center">
+                    <small>{{ post.post_date|date:"j.n.Y, H:i" }}</small>
+                </div>
+            </div>
+            <div class="vr mx-2"></div>
+            <div class="post-text">
+                {{ post.post_content }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+
+
+
+
+
+        {% endblock content %}

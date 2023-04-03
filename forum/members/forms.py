@@ -1,6 +1,7 @@
 from .models import Member
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.core.exceptions import ValidationError
 
 class MemberCreationForm(UserCreationForm):
 
@@ -53,3 +54,4 @@ class MemberChangeForm(UserChangeForm):
         help_texts ={
             'username': None,
         }
+

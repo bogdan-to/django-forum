@@ -30,13 +30,12 @@ def login_member(request):
         member:Member = authenticate(username=username, password=password)
         if member:
             login(request, member)
-            messages.success(request, 'Dobrodosli, '+member.username+'!', extra_tags='alert-success')
-            return redirect('index')
-
-    context = {
-        'form': login_form
-    }
-    return render(request, 'login.html', context)
+            messages.success(request, 'Dobrodosli, '+ member.username + '!', extra_tags='alert-success')
+            return redirect(request.META.get('HTTP_REFERER', 'forum'))
+        
+    messages.error(request, 'Pogrešno ime ili lozinka', extra_tags='alert-danger') 
+   
+    return redirect(request.META.get('HTTP_REFERER', 'forum'))
 
 @login_required(login_url='login')
 def logout_member(request):
@@ -44,4 +43,4 @@ def logout_member(request):
     messages.success(request, 'Uspešno ste se odjavili. Dođite nam ponovo!', extra_tags='alert-success')
     return redirect('index')
 
-
+ 

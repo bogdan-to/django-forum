@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, Topic
+from .models import Category, Topic, Post
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -13,12 +13,12 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-def category(request,slug):
+def category(request,category_slug):
 
-    category = get_object_or_404(Category, category_slug=slug)
+    category = get_object_or_404(Category, category_slug=category_slug)
     topics = Topic.objects.filter(topic_category = category).order_by('-topic_date')
 
-    paginated_topics = Paginator(topics, 10)
+    paginated_topics = Paginator(topics, 6)
     page = request.GET.get('page', 1)
     topics_on_page = paginated_topics.get_page(page)
     page_range = paginated_topics.get_elided_page_range(number=page, on_each_side=1, on_ends=1)
@@ -30,6 +30,20 @@ def category(request,slug):
     }
 
     return render(request, 'category.html', context)
+
+def topic(request, category_slug, topic_slug):
+
+    category = get_object_or_404(Category, category_slug=category_slug)
+    topic = get_object_or_404(Topic, topic_slug=topic_slug)
+    posts = Post.objects.filter(post_topic=topic.id)
+
+    context = {
+        'category': category,
+        'topic': topic,
+        'posts': posts
+    }
+
+    return render(request, 'topic.html', context)
 
 @login_required(login_url='login')
 def new_topic(request, category_id):
@@ -60,7 +74,9 @@ def new_topic(request, category_id):
             messages.error(request, 'Tema ne sme biti prazna.', extra_tags='alert-warning')
     return redirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required(login_url='login')
+def new_post(request, topic_id):
+    pass
 
 def error_404_view(request, exception):
     return render(request, '404.html')

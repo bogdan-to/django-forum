@@ -112,11 +112,11 @@ body, html{
 
 /* Category topics */
 
-.new-topic-btn{
+.new-topic-btn, .new-post-btn{
     background-color: #b51d1d !important;
 }
 
-.new-topic-btn:active{
+.new-topic-btn:active, .new-post-btn:active{
     box-shadow: none;
 }
 
