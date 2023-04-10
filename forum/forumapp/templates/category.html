@@ -7,10 +7,13 @@
   
   <div class="mx-md-5">
 
-    <h5>Teme u kategoriji: {{ category.category_name }} </h5>
-    
+    <div class="d-flex align-items-center ms-1 mb-3">
+      <a href="{% url 'index' %}" class="pb-1 pe-3">&lt&lt&lt Nazad na kategorije</a>
+      <h5 class="p-0">Teme u kategoriji: {{ category.category_name }} </h5>
+    </div>
+
     {% if user.is_authenticated %}
-    <div class="new-topic mb-3">
+    <div class="new-topic mb-3 ms-1">
         <button type="button" class="btn btn-dark new-topic-btn shadowed rounded-0" data-bs-toggle="collapse" data-bs-target="#newTopicForm" aria-expanded="false" aria-controls="collapsenewTopicForm">+ Nova tema</button>
     </div>
 
